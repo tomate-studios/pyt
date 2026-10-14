@@ -1,0 +1,7 @@
+# Archivos excluidos al subir el código fuente a Google Cloud
+node_modules
+dist
+server/data
+.git
+*.log
+.DS_Store
