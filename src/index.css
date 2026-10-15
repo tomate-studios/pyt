@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Tema oscuro espacial P.Y.T. — azul, violeta, blanco y negro */
+    --background: 232 47% 5%;
+    --foreground: 0 0% 96%;
+    --card: 231 38% 9%;
+    --card-foreground: 0 0% 96%;
+    --popover: 231 38% 8%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 221 83% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 262 60% 55%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 231 25% 16%;
+    --muted-foreground: 226 20% 68%;
+    --accent: 262 83% 62%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 231 25% 18%;
+    --input: 231 25% 20%;
+    --ring: 221 83% 60%;
+    --radius: 0.75rem;
+    --sidebar-background: 231 38% 8%;
+    --sidebar-foreground: 0 0% 96%;
+    --sidebar-primary: 221 83% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 231 25% 16%;
+    --sidebar-accent-foreground: 0 0% 96%;
+    --sidebar-border: 231 25% 18%;
+    --sidebar-ring: 221 83% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 20% -10%, hsl(221 83% 30% / 0.25), transparent),
+      radial-gradient(ellipse 60% 40% at 85% 10%, hsl(262 83% 35% / 0.2), transparent),
+      radial-gradient(ellipse 50% 35% at 50% 110%, hsl(250 60% 25% / 0.15), transparent);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  /* Tarjeta con efecto cristal */
+  .glass-card {
+    @apply rounded-xl border border-white/10 bg-white/[0.04] backdrop-blur-sm;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .glass-card:hover {
+    @apply border-violet-400/40;
+    box-shadow: 0 0 24px hsl(262 83% 62% / 0.12), 0 8px 32px hsl(232 47% 2% / 0.5);
+    transform: translateY(-2px);
+  }
+  .glow-title {
+    text-shadow: 0 0 30px hsl(221 83% 60% / 0.55), 0 0 60px hsl(262 83% 62% / 0.35);
+  }
+  .nebula-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(221 83% 60% / 0.5), hsl(262 83% 62% / 0.5), transparent);
+  }
+}
+
+/* Estrellas del fondo (generadas por Starfield.tsx) */
+.star {
+  position: absolute;
+  border-radius: 9999px;
+  background: white;
+  animation: twinkle var(--tw-duration, 4s) ease-in-out infinite;
+  animation-delay: var(--tw-delay, 0s);
+  opacity: 0.15;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: var(--tw-max, 0.8); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .star { animation: none; opacity: 0.4; }
+  .glass-card, .glass-card:hover { transition: none; transform: none; }
+}
+
+/* Aparición suave de tarjetas */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise { animation: rise 0.4s ease both; }
+@media (prefers-reduced-motion: reduce) {
+  .rise { animation: none; }
+}
+
+/* Scrollbar discreta */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: hsl(232 47% 5%); }
+::-webkit-scrollbar-thumb { background: hsl(231 25% 22%); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(262 60% 40%); }
